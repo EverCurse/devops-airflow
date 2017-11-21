@@ -1,0 +1,47 @@
+syntax = "proto3";
+package service;
+
+service Ping {
+    //check agent status
+  rpc Ping(ReqPingData) returns (RespPingData){}
+}
+
+service Deploy {
+    //deploy
+  rpc Deploy(ReqPingData) returns (RespPingData){}
+}
+
+service ServiceCheck {
+    //after deploy to check http status
+  rpc ServiceCheck(ReqCheckSvcData) returns (RespCheckSvcData){}
+}
+
+
+
+/////////////////////////////////////////////////////////
+message ReqPingData {
+    string health_url = 1;
+}
+
+message RespPingData {
+    string status = 1;
+}
+
+message ReqDeployData {
+    string version = 1;
+    string type = 2;
+    string service = 3;
+    int32 port = 4;
+}
+
+message RespDeployData {
+    int32 status = 1;
+}
+
+message ReqCheckSvcData {
+    string health_url = 1;
+}
+
+message RespCheckSvcData {
+    string status = 1;
+}
