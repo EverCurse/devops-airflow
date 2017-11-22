@@ -43,7 +43,7 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
     def Deploy(self, request, context):
         ret_logs = ''
         cmd = """
-        cd /tmp && wget http://192.168.15.255:9999/api.jar && mv /tmp/api.jar /usr/local/ && cd /usr/local/ && chown www-data.www-data api.jar
+        cd /tmp && wget http://192.168.15.255:9999/api.jar && mv /tmp/api.jar /usr/local/ && chown www-data.www-data /usr/local/api.jar
         group="api"
         pid=`supervisorctl pid $group`
         if [[ $pid -eq 0 ]] ; then
