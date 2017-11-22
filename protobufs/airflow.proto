@@ -30,7 +30,7 @@ message RespPingData {
 message ReqDeployData {
     string version = 1;
     string type = 2;
-    string service = 3;
+    string service_name = 3;
     int32 port = 4;
 }
 

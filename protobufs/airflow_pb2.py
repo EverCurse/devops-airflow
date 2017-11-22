@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='airflow.proto',
   package='service',
   syntax='proto3',
-  serialized_pb=_b('\n\rairflow.proto\x12\x07service\"!\n\x0bReqPingData\x12\x12\n\nhealth_url\x18\x01 \x01(\t\"\x1e\n\x0cRespPingData\x12\x0e\n\x06status\x18\x01 \x01(\t\"M\n\rReqDeployData\x12\x0f\n\x07version\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x0f\n\x07service\x18\x03 \x01(\t\x12\x0c\n\x04port\x18\x04 \x01(\x05\"k\n\x0eRespDeployData\x12-\n\x03ret\x18\x01 \x03(\x0b\x32 .service.RespDeployData.RetEntry\x1a*\n\x08RetEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"%\n\x0fReqCheckSvcData\x12\x12\n\nhealth_url\x18\x01 \x01(\t\"\"\n\x10RespCheckSvcData\x12\x0e\n\x06status\x18\x01 \x01(\t2=\n\x04Ping\x12\x35\n\x04Ping\x12\x14.service.ReqPingData\x1a\x15.service.RespPingData\"\x00\x32\x45\n\x06\x44\x65ploy\x12;\n\x06\x44\x65ploy\x12\x16.service.ReqDeployData\x1a\x17.service.RespDeployData\"\x00\x32U\n\x0cServiceCheck\x12\x45\n\x0cServiceCheck\x12\x18.service.ReqCheckSvcData\x1a\x19.service.RespCheckSvcData\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\rairflow.proto\x12\x07service\"!\n\x0bReqPingData\x12\x12\n\nhealth_url\x18\x01 \x01(\t\"\x1e\n\x0cRespPingData\x12\x0e\n\x06status\x18\x01 \x01(\t\"R\n\rReqDeployData\x12\x0f\n\x07version\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x14\n\x0cservice_name\x18\x03 \x01(\t\x12\x0c\n\x04port\x18\x04 \x01(\x05\"k\n\x0eRespDeployData\x12-\n\x03ret\x18\x01 \x03(\x0b\x32 .service.RespDeployData.RetEntry\x1a*\n\x08RetEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"%\n\x0fReqCheckSvcData\x12\x12\n\nhealth_url\x18\x01 \x01(\t\"\"\n\x10RespCheckSvcData\x12\x0e\n\x06status\x18\x01 \x01(\t2=\n\x04Ping\x12\x35\n\x04Ping\x12\x14.service.ReqPingData\x1a\x15.service.RespPingData\"\x00\x32\x45\n\x06\x44\x65ploy\x12;\n\x06\x44\x65ploy\x12\x16.service.ReqDeployData\x1a\x17.service.RespDeployData\"\x00\x32U\n\x0cServiceCheck\x12\x45\n\x0cServiceCheck\x12\x18.service.ReqCheckSvcData\x1a\x19.service.RespCheckSvcData\"\x00\x62\x06proto3')
 )
 
 
@@ -109,7 +109,7 @@ _REQDEPLOYDATA = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='service', full_name='service.ReqDeployData.service', index=2,
+      name='service_name', full_name='service.ReqDeployData.service_name', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -135,7 +135,7 @@ _REQDEPLOYDATA = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=93,
-  serialized_end=170,
+  serialized_end=175,
 )
 
 
@@ -172,8 +172,8 @@ _RESPDEPLOYDATA_RETENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=237,
-  serialized_end=279,
+  serialized_start=242,
+  serialized_end=284,
 )
 
 _RESPDEPLOYDATA = _descriptor.Descriptor(
@@ -202,8 +202,8 @@ _RESPDEPLOYDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=172,
-  serialized_end=279,
+  serialized_start=177,
+  serialized_end=284,
 )
 
 
@@ -233,8 +233,8 @@ _REQCHECKSVCDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=281,
-  serialized_end=318,
+  serialized_start=286,
+  serialized_end=323,
 )
 
 
@@ -264,8 +264,8 @@ _RESPCHECKSVCDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=320,
-  serialized_end=354,
+  serialized_start=325,
+  serialized_end=359,
 )
 
 _RESPDEPLOYDATA_RETENTRY.containing_type = _RESPDEPLOYDATA
@@ -338,8 +338,8 @@ _PING = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=356,
-  serialized_end=417,
+  serialized_start=361,
+  serialized_end=422,
   methods=[
   _descriptor.MethodDescriptor(
     name='Ping',
@@ -362,8 +362,8 @@ _DEPLOY = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   options=None,
-  serialized_start=419,
-  serialized_end=488,
+  serialized_start=424,
+  serialized_end=493,
   methods=[
   _descriptor.MethodDescriptor(
     name='Deploy',
@@ -386,8 +386,8 @@ _SERVICECHECK = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=2,
   options=None,
-  serialized_start=490,
-  serialized_end=575,
+  serialized_start=495,
+  serialized_end=580,
   methods=[
   _descriptor.MethodDescriptor(
     name='ServiceCheck',
