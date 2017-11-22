@@ -63,7 +63,7 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
 
         # step 2, down jar file
         r = requests.get('http://192.168.15.255:9999/api.jar', stream=True)
-        jar_name = request.service+'-'+request.version+'.jar'
+        jar_name = request.service_name+'-'+request.version+'.jar'
         jar_path = "/home/www-data/deploy/{0}/{1}/{2}".format(request.service_name, request.version, jar_name)
         f = open(jar_path, "wb")
         for chunk in r.iter_content(chunk_size=512):
