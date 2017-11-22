@@ -42,6 +42,10 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
     """
     def Deploy(self, request, context):
         ret_logs = ''
+        print request.service
+        print request.type
+        print request.port
+        print request.version
 
         # step 1, create dir
         p_mkdir = subprocess.Popen('mkdir -p /home/www-data/deploy/{0}/{1}/'.format(request.service,
@@ -99,8 +103,8 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
 
         # step 5 启动服务
         p_start_service = subprocess.Popen('/usr/bin/supervisorctl start {0}'.format(request.service),
-                                     shell=True, stdin=subprocess.PIPE,
-                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                                           shell=True, stdin=subprocess.PIPE,
+                                           stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if not p_start_service.stderr.readlines():
             ret_logs += u'service {0} 进程启动成功 \n'.format(request.service)
         else:
