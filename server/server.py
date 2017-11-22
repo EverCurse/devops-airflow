@@ -27,8 +27,11 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
     正式部署
     """
     def Deploy(self, request, context):
-        status = 'Pong'
-        return airflow_pb2.RespDeployData(status=status)
+        ret = {
+            'status': '200',
+            'logs': 'hello,world',
+        }
+        return airflow_pb2.RespDeployData(ret=ret)
 
 
 class ServiceCheck(airflow_pb2_grpc.ServiceCheckServicer):

@@ -13,16 +13,9 @@ def run():
     response = client.Ping(airflow_pb2.ReqPingData(health_url=''))
     print response.status
 
-    cli_check = airflow_pb2_grpc.ServiceCheckStub(channel=conn)
-    for count in range(3):
-        try:
-            res_check = cli_check.ServiceCheck(airflow_pb2.ReqCheckSvcData(health_url='http://www.baidu.com/'))
-        except Exception, e:
-            print '500'
-        else:
-            print res_check.status
-        import time
-        time.sleep(10)
+    client2 = airflow_pb2_grpc.DeployStub(channel=conn)
+    response2 = client2.Deploy(airflow_pb2.ReqDeployData(version='v1.2', type='jar', service='haixue_demo', port=9500))
+    print response2.ret
 
 
 if __name__ == '__main__':

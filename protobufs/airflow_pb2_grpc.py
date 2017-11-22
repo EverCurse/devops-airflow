@@ -5,8 +5,8 @@ import airflow_pb2 as airflow__pb2
 
 
 class PingStub(object):
-  """protobufs
-  """
+  # missing associated documentation comment in .proto file
+  pass
 
   def __init__(self, channel):
     """Constructor.
@@ -22,8 +22,8 @@ class PingStub(object):
 
 
 class PingServicer(object):
-  """protobufs
-  """
+  # missing associated documentation comment in .proto file
+  pass
 
   def Ping(self, request, context):
     """check agent status
@@ -58,8 +58,8 @@ class DeployStub(object):
     """
     self.Deploy = channel.unary_unary(
         '/service.Deploy/Deploy',
-        request_serializer=airflow__pb2.ReqPingData.SerializeToString,
-        response_deserializer=airflow__pb2.RespPingData.FromString,
+        request_serializer=airflow__pb2.ReqDeployData.SerializeToString,
+        response_deserializer=airflow__pb2.RespDeployData.FromString,
         )
 
 
@@ -68,8 +68,8 @@ class DeployServicer(object):
   pass
 
   def Deploy(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """deploy
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -79,8 +79,8 @@ def add_DeployServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'Deploy': grpc.unary_unary_rpc_method_handler(
           servicer.Deploy,
-          request_deserializer=airflow__pb2.ReqPingData.FromString,
-          response_serializer=airflow__pb2.RespPingData.SerializeToString,
+          request_deserializer=airflow__pb2.ReqDeployData.FromString,
+          response_serializer=airflow__pb2.RespDeployData.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
@@ -110,8 +110,8 @@ class ServiceCheckServicer(object):
   pass
 
   def ServiceCheck(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """after deploy to check http status
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
