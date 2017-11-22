@@ -4,9 +4,6 @@
     <list default="true" id="fd073b07-aef7-41a5-bdb9-08d43e008219" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/client.py" afterPath="$PROJECT_DIR$/client/client.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protobufs/airflow.proto" afterPath="$PROJECT_DIR$/protobufs/airflow.proto" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protobufs/airflow_pb2.py" afterPath="$PROJECT_DIR$/protobufs/airflow_pb2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protobufs/airflow_pb2_grpc.py" afterPath="$PROJECT_DIR$/protobufs/airflow_pb2_grpc.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/server.py" afterPath="$PROJECT_DIR$/server/server.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/server/server.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="495">
-              <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+              <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding>
                 <element signature="e#47#58#0" expanded="true" />
               </folding>
@@ -505,7 +502,7 @@
     <entry file="file://$PROJECT_DIR$/server/server.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
-          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding>
             <element signature="e#47#58#0" expanded="true" />
           </folding>

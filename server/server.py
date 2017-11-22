@@ -3,13 +3,26 @@
 import grpc
 import time
 from concurrent import futures
+import sys
+sys.path.append('..')
 from protobufs import airflow_pb2_grpc, airflow_pb2
 import requests
 from requests.exceptions import ConnectionError
 from requests.exceptions import ConnectTimeout
 
 _ONE_DAY_IN_SECONDS = 24*60*60
-_HOST = 'localhost'
+
+
+def query_address():
+    _HOST = ''
+    with file('/etc/private.ip') as f:
+        for line in f.readlines():
+            _HOST = line.strip()
+            break
+    print 'service register at {0}'.format(_HOST)
+    return _HOST
+
+
 _PORT = '9999'
 
 
@@ -60,7 +73,7 @@ def serve():
     airflow_pb2_grpc.add_PingServicer_to_server(Ping(), grpcServer)
     airflow_pb2_grpc.add_ServiceCheckServicer_to_server(ServiceCheck(), grpcServer)
     airflow_pb2_grpc.add_DeployServicer_to_server(Deploy(), grpcServer)
-    grpcServer.add_insecure_port(_HOST + ':' + _PORT)
+    grpcServer.add_insecure_port(query_address() + ':' + _PORT)
     grpcServer.start()
     try:
         while True:

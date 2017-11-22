@@ -3,7 +3,7 @@
 import grpc
 from protobufs import airflow_pb2, airflow_pb2_grpc
 
-_HOST = 'localhost'
+_HOST = '127.0.0.1'
 _PORT = '9999'
 
 
