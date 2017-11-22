@@ -88,7 +88,7 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
         p_replace_jar = subprocess.Popen('cp -r -f {0} /data/{1}/'.format(jar_path, request.service),
                                          shell=True, stdin=subprocess.PIPE,
                                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        if p_replace_jar.stderr.readlines():
+        if not p_replace_jar.stderr.readlines():
             ret_logs += u'{0} 复制到工作目录成功 \n'.format(jar_name)
         else:
             ret = {
