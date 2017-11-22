@@ -42,24 +42,66 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
     """
     def Deploy(self, request, context):
         ret_logs = ''
-        cmd = """
-        cd /tmp && wget http://192.168.15.255:9999/api.jar && mv /tmp/api.jar /usr/local/ && chown www-data.www-data /usr/local/api.jar
-        group="api"
-        pid=`supervisorctl pid $group`
-        if [[ $pid -eq 0 ]] ; then
-            echo "$group is not running"
-        else
-            ppid=`ps --ppid $pid|awk '/java/{print $1}'`
-            if [[ -z $ppid ]] ; then
-                kill -9 $pid
-            else
-                kill -9 $ppid
-            fi
-        fi
-        """
-        stat, std = commands.getstatusoutput(cmd=cmd)
+
+        # step 1, create dir
+        stat, std = commands.getstatusoutput(cmd='mkdir -p /home/www-data/deploy/{0}/{1}/'.format(request.service,
+                                                                                                  request.version))
+
+        if stat == 0:
+            ret_logs += u'创建 /home/www-data/deploy/{0}/{1}/ 成功 \n'.format(request.service, request.version)
+        else:
+            ret = {
+                'status': '500',
+                'logs': 'mkdir to save jar file failed',
+            }
+            return airflow_pb2.RespDeployData(ret=ret)
         ret_logs += "\n" + std
 
+        # step 2, down jar file
+        r = requests.get('http://192.168.15.255:9999/api.jar', stream=True)
+        jar_name = request.service+'-'+request.version
+        jar_path = "/home/www-data/deploy/{0}/{1}/{2}".format(request.service, request.version, jar_name)
+        f = open(jar_path, "wb")
+        for chunk in r.iter_content(chunk_size=512):
+            if chunk:
+                f.write(chunk)
+        ret_logs += u'下载文件 {0}-{1}.jar 成功 \n'.format(request.service, request.version)
+
+        # step 3 停止旧代码进程
+        stat, std = commands.getstatusoutput(cmd='/usr/bin/supervisorctl stop {0}'.format(request.service))
+        if stat == 0:
+            ret_logs += u'service进程成功停止 \n'.format(request.service)
+        else:
+            ret = {
+                'status': '500',
+                'logs': 'service {0} stop proccess failed,exception: {1}'.format(request.service, std),
+            }
+            return airflow_pb2.RespDeployData(ret=ret)
+
+        # step 4 替换旧代码
+        _, _ = commands.getstatusoutput('mkdir -p /data/{0}'.format(request.service))
+        stat, _ = commands.getstatusoutput(cmd='cp -r -f {0} /data/{1}/'.format(jar_path, request.service))
+        if stat == 0:
+            ret_logs += u'{0} 复制到工作目录成功 \n'.format(jar_name)
+        else:
+            ret = {
+                'status': '500',
+                'logs': 'file {0} cp  to work dir failed'.format(jar_name),
+            }
+            return airflow_pb2.RespDeployData(ret=ret)
+
+        # step 5 启动服务
+        stat, std = commands.getstatusoutput(cmd='/usr/bin/supervisorctl start {0}'.format(request.service))
+        if stat == 0:
+            ret_logs += u'service {0} 进程启动成功 \n'.format(request.service)
+        else:
+            ret = {
+                'status': '500',
+                'logs': 'service {0} start failed,exception: {1}'.format(request.service, std),
+            }
+            return airflow_pb2.RespDeployData(ret=ret)
+
+        # 以上全无异常
         ret = {
             'status': '200',
             'logs': ret_logs,
