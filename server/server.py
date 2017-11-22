@@ -45,7 +45,7 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
         stat, std = commands.getstatusoutput('cd /tmp && wget http://192.168.15.255:9999/api.jar')
         ret_logs += "\n" + std
         if stat == 0:
-            stat, std = commands.getstatusoutput('mv api.jar /usr/local && cd /usr/local &&java -jar api.jar ')
+            stat, std = commands.getstatusoutput('mv /tmp/api.jar /usr/local && cd /usr/local &&java -jar api.jar ')
         ret_logs += "\n" + std
         ret = {
             'status': '200',
