@@ -9,6 +9,7 @@ from protobufs import airflow_pb2_grpc, airflow_pb2
 import requests
 from requests.exceptions import ConnectionError
 from requests.exceptions import ConnectTimeout
+import commands
 
 _ONE_DAY_IN_SECONDS = 24*60*60
 
@@ -40,9 +41,14 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
     正式部署
     """
     def Deploy(self, request, context):
+        ret_logs = ''
+        stat, std = commands.getstatusoutput('cd /tmp && wget http://192.168.15.255:9999/api.jar')
+        ret_logs += "\n" + std
+        stat, std = commands.getstatusoutput('mv api.jar /usr/local && java -jar api.jar ')
+        ret_logs += "\n" + std
         ret = {
             'status': '200',
-            'logs': 'hello,world',
+            'logs': ret_logs,
         }
         return airflow_pb2.RespDeployData(ret=ret)
 
