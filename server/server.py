@@ -42,18 +42,18 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
     """
     def Deploy(self, request, context):
         ret_logs = ''
-        print request.service
+        print request.service_name
         print request.type
         print request.port
         print request.version
 
         # step 1, create dir
-        p_mkdir = subprocess.Popen('mkdir -p /home/www-data/deploy/{0}/{1}/'.format(request.service,
+        p_mkdir = subprocess.Popen('mkdir -p /home/www-data/deploy/{0}/{1}/'.format(request.service_name,
                                                                                     request.version),
                                    shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         if not p_mkdir.stderr.readlines():
-            ret_logs += u'创建 /home/www-data/deploy/{0}/{1}/ 成功 \n'.format(request.service, request.version)
+            ret_logs += u'创建 /home/www-data/deploy/{0}/{1}/ 成功 \n'.format(request.service_name, request.version)
         else:
             ret = {
                 'status': '500',
@@ -64,32 +64,32 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
         # step 2, down jar file
         r = requests.get('http://192.168.15.255:9999/api.jar', stream=True)
         jar_name = request.service+'-'+request.version+'.jar'
-        jar_path = "/home/www-data/deploy/{0}/{1}/{2}".format(request.service, request.version, jar_name)
+        jar_path = "/home/www-data/deploy/{0}/{1}/{2}".format(request.service_name, request.version, jar_name)
         f = open(jar_path, "wb")
         for chunk in r.iter_content(chunk_size=512):
             if chunk:
                 f.write(chunk)
-        ret_logs += u'下载文件 {0}-{1}.jar 成功 \n'.format(request.service, request.version)
+        ret_logs += u'下载文件 {0}-{1}.jar 成功 \n'.format(request.service_name, request.version)
 
         # step 3 停止旧代码进程
-        p_stop_proc = subprocess.Popen('/usr/bin/supervisorctl stop {0}'.format(request.service),
+        p_stop_proc = subprocess.Popen('/usr/bin/supervisorctl stop {0}'.format(request.service_name),
                                        shell=True, stdin=subprocess.PIPE,
                                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if not p_stop_proc.stderr.readlines():
-            ret_logs += u'service进程成功停止 \n'.format(request.service)
+            ret_logs += u'service进程成功停止 \n'.format(request.service_name)
         else:
             ret = {
                 'status': '500',
-                'logs': 'service {0} stop proccess failed,exception: {1}'.format(request.service,
+                'logs': 'service {0} stop proccess failed,exception: {1}'.format(request.service_name,
                                                                                  p_stop_proc.stderr.read()),
             }
             return airflow_pb2.RespDeployData(ret=ret)
 
         # step 4 替换旧代码
-        _ = subprocess.Popen('mkdir -p /data/{0}'.format(request.service),
+        _ = subprocess.Popen('mkdir -p /data/{0}'.format(request.service_name),
                              shell=True, stdin=subprocess.PIPE,
                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        p_replace_jar = subprocess.Popen('cp -r -f {0} /data/{1}/'.format(jar_path, request.service),
+        p_replace_jar = subprocess.Popen('cp -r -f {0} /data/{1}/'.format(jar_path, request.service_name),
                                          shell=True, stdin=subprocess.PIPE,
                                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if not p_replace_jar.stderr.readlines():
@@ -102,15 +102,15 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
             return airflow_pb2.RespDeployData(ret=ret)
 
         # step 5 启动服务
-        p_start_service = subprocess.Popen('/usr/bin/supervisorctl start {0}'.format(request.service),
+        p_start_service = subprocess.Popen('/usr/bin/supervisorctl start {0}'.format(request.service_name),
                                            shell=True, stdin=subprocess.PIPE,
                                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if not p_start_service.stderr.readlines():
-            ret_logs += u'service {0} 进程启动成功 \n'.format(request.service)
+            ret_logs += u'service {0} 进程启动成功 \n'.format(request.service_name)
         else:
             ret = {
                 'status': '500',
-                'logs': 'service {0} start failed,exception: {1}'.format(request.service, p_start_service.stderr.read()),
+                'logs': 'service {0} start failed,exception: {1}'.format(request.service_name, p_start_service.stderr.read()),
             }
             return airflow_pb2.RespDeployData(ret=ret)
 

@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd073b07-aef7-41a5-bdb9-08d43e008219" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/server.py" afterPath="$PROJECT_DIR$/server/server.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="airflow.proto" pinned="false" current-in-tab="true">
+      <file leaf-file-name="airflow.proto" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protobufs/airflow.proto">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="21" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="21" />
+            <state relative-caret-position="260">
+              <caret line="30" column="23" lean-forward="true" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -36,11 +38,21 @@
       <file leaf-file-name="server.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+            <state relative-caret-position="160">
+              <caret line="104" column="23" lean-forward="false" selection-start-line="104" selection-start-column="16" selection-end-line="104" selection-end-column="23" />
               <folding>
                 <element signature="e#47#58#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="5" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,6 +101,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>Do</find>
+      <find>service</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -106,8 +119,10 @@
         <option value="$PROJECT_DIR$/client/client.py" />
         <option value="$PROJECT_DIR$/client/client.py" />
         <option value="$PROJECT_DIR$/server/cmds.py" />
+        <option value="$PROJECT_DIR$/protobufs/airflow.proto" />
         <option value="$PROJECT_DIR$/server/server.py" />
         <option value="$PROJECT_DIR$/server/server.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -144,16 +159,6 @@
             <path>
               <item name="airflow" type="b2602c69:ProjectViewProjectNode" />
               <item name="airflow" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="airflow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airflow" type="462c0819:PsiDirectoryNode" />
-              <item name="protobufs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="airflow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airflow" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -318,7 +323,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6166868" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26037195" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -507,14 +512,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="385">
@@ -531,20 +528,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/protobufs/airflow.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="30" column="23" lean-forward="true" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+        <state relative-caret-position="160">
+          <caret line="104" column="23" lean-forward="false" selection-start-line="104" selection-start-column="16" selection-end-line="104" selection-end-column="23" />
           <folding>
             <element signature="e#47#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protobufs/airflow.proto">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="21" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="21" />
+        <state relative-caret-position="15">
+          <caret line="1" column="5" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
           <folding />
         </state>
       </provider>
