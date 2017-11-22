@@ -42,7 +42,7 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
     """
     def Deploy(self, request, context):
         ret_logs = ''
-        stat, std = commands.getstatusoutput('cd /tmp && wget http://192.168.15.255:9999/api.jar && mv /tmp/api.jar /usr/local && chown www-data.www-data api.jar ')
+        stat, std = commands.getstatusoutput('cd /tmp && wget http://192.168.15.255:9999/api.jar && mv /tmp/api.jar /usr/local && cd /usr/local/ && chown www-data.www-data api.jar ')
         ret_logs += "\n" + std
         if stat == 0:
             stat, std = commands.getstatusoutput("su - www-data -c 'cd /usr/local && java -jar api.jar' ")
