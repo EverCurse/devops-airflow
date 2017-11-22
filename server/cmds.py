@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import commands
+import subprocess
 
-cmds='ls'
-
-print commands.getstatusoutput(cmd=cmds)[1].split()
+p = subprocess.Popen('df -h', shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+print p.stdout.readlines()
