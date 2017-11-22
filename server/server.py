@@ -42,11 +42,6 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
     """
     def Deploy(self, request, context):
         ret_logs = ''
-        print request.service_name
-        print request.type
-        print request.port
-        print request.version
-
         # step 1, create dir
         p_mkdir = subprocess.Popen('mkdir -p /home/www-data/deploy/{0}/{1}/'.format(request.service_name,
                                                                                     request.version),
