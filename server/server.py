@@ -60,11 +60,19 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
         r = requests.get('http://192.168.15.255:9999/api.jar', stream=True)
         jar_name = request.service_name+'-'+request.version+'.jar'
         jar_path = "/home/www-data/deploy/{0}/{1}/{2}".format(request.service_name, request.version, jar_name)
-        f = open(jar_path, "wb")
-        for chunk in r.iter_content(chunk_size=512):
-            if chunk:
-                f.write(chunk)
-        ret_logs += u'下载文件 {0}-{1}.jar 成功 \n'.format(request.service_name, request.version)
+        p_download_jar = subprocess.Popen('wget http://192.168.15.255:9999/{0} -O /home/www-data/deploy/{1}/{2}/'
+                                          .format(jar_name , request.service_name, request.version),
+                                          shell=True, stdin=subprocess.PIPE,
+                                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        if not p_download_jar.stderr.readlines():
+            ret_logs += u'下载文件 {0}-{1}.jar 成功 \n'.format(request.service_name, request.version)
+        else:
+            ret = {
+                'status': '500',
+                'logs': 'download  jar failed, exception: {0} \n'.format(p_download_jar.stderr.read()),
+            }
+            return airflow_pb2.RespDeployData(ret=ret)
 
         # step 3 停止旧代码进程
         p_stop_proc = subprocess.Popen('/usr/bin/supervisorctl stop {0}'.format(request.service_name),
