@@ -57,11 +57,10 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
             return airflow_pb2.RespDeployData(ret=ret)
 
         # step 2, down jar file
-        r = requests.get('http://192.168.15.255:9999/api.jar', stream=True)
         jar_name = request.service_name+'-'+request.version+'.jar'
         jar_path = "/home/www-data/deploy/{0}/{1}/{2}".format(request.service_name, request.version, jar_name)
-        p_download_jar = subprocess.Popen('wget http://192.168.15.255:9999/{0} -O /home/www-data/deploy/{1}/{2}/'
-                                          .format(jar_name , request.service_name, request.version),
+        p_download_jar = subprocess.Popen('wget http://192.168.15.255:9999/{0} -O /home/www-data/deploy/{1}/{2}/{0}'
+                                          .format(jar_name, request.service_name, request.version),
                                           shell=True, stdin=subprocess.PIPE,
                                           stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 

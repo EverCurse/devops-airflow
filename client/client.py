@@ -14,7 +14,7 @@ def run():
     print response.status
 
     client2 = airflow_pb2_grpc.DeployStub(channel=conn)
-    response2 = client2.Deploy(airflow_pb2.ReqDeployData(version='v1.2', type='jar', service='haixue_demo', port=9500))
+    response2 = client2.Deploy(airflow_pb2.ReqDeployData(version='v1.2', type='jar', service='haapiixue_demo', port=9500))
     print response2.ret
 
 
