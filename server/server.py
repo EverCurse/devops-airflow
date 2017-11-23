@@ -59,17 +59,17 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
         # step 2, down jar file
         jar_name = request.service_name+'-'+request.version+'.jar'
         jar_path = "/home/www-data/deploy/{0}/{1}/{2}".format(request.service_name, request.version, jar_name)
-        p_download_jar = subprocess.Popen('wget http://192.168.15.255:9999/{0} -O /home/www-data/deploy/{1}/{2}/{0}'
-                                          .format(jar_name, request.service_name, request.version),
-                                          shell=True, stdin=subprocess.PIPE,
-                                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        import commands
+        ret, stdout = commands.getstatusoutput('wget http://192.168.15.255:9999/{0} -O '
+                                               '/home/www-data/deploy/{1}/{2}/{0}'
+                                               .format(jar_name, request.service_name, request.version))
 
-        if not p_download_jar.stderr.readlines():
+        if ret == 0:
             ret_logs += u'下载文件 {0}-{1}.jar 成功 \n'.format(request.service_name, request.version)
         else:
             ret = {
                 'status': '500',
-                'logs': 'download  jar failed, exception: {0} \n'.format(p_download_jar.stderr.read()),
+                'logs': 'download  jar failed, exception: {0} \n'.format(stdout),
             }
             return airflow_pb2.RespDeployData(ret=ret)
 
