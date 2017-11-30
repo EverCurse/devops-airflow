@@ -69,7 +69,7 @@ class Deploy(airflow_pb2_grpc.DeployServicer):
         else:
             ret = {
                 'status': '500',
-                'logs': 'download  jar failed, exception: {0} \n'.format(stdout),
+                'logs': 'download  jar failed, exception: {0} \n'.format(str(stdout)),
             }
             return airflow_pb2.RespDeployData(ret=ret)
 
